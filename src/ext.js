@@ -786,7 +786,7 @@ var IO = {
 			// events
 			['h', Lang.get('onOpenClose'),					'onOpenClose',					Lang.getSensor('button'), 'I1', Lang.getOpenClose('opens')],
 			['h', Lang.get('onCounter'),					'onCounter',					'C1', '>', 0],
-			['h', Lang.get('onInput'),						'onInput',						Lang.getSensor('color'), 'I1', '<', 0],
+			['h', Lang.get('onInput'),						'onInput',						Lang.getSensor('color'), 'I1', '>', 0],
 				
 			// gets
 			['r', Lang.get('getCounter'),					'getCounter',					'C1'],
