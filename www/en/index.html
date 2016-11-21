@@ -1,0 +1,233 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>FTScratchTXT</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />	
+	</head>
+	
+	<body>
+		
+		<h1><span style="color:#ed1c24;">FT</span><span style="color:#0071bc;">ScratchTXT</span></h1>
+		
+		<section>
+			<h1>About the product</h1>
+			<div class="content">
+				<img src="http://www.fischertechnik.de/resourceimage.aspx?raid=6851" class="product"/>
+				<b>FTScratchTXT</b> enables use of the fischertechnik
+				<a href="http://www.fischertechnik.de/desktopdefault.aspx/tabid-21/39_read-309/usetemplate-2_column_pano/">ROBOTICS TXT Controller </a>
+				on PCS or notebooks together with the easy-to-learn programming language
+				<a href="https://scratch.mit.edu/">Scratch</a>.
+				This allows little applications for the control of motors and lamps using switches,
+				light barriers and lots of other sensors to be created in a flash. The large number
+				of options offered by the programming language, Scratch, means that much larger programs can be created.
+				<br/><br/>
+
+				New Scratch upgrades, such as FTScratch, use the developer version
+				<a href="http://scratchx.org/">ScratchX</a>.
+			</div>
+		</section>
+		
+		<section>
+		
+			<h1>HowTo</h1>
+			
+			<div class="content">
+				<h2>Windows</h2>
+				<ol>
+					<li>
+						Connect ROBOTICS TXT with the PC
+						<small>(USB/WiFi/Bluetooth)</small>
+					</li>
+					<li>
+						Download the USB driver (
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5616">32 Bit</a>
+						/
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5617">64 Bit</a>
+						) and install it
+					</li>
+					<li>
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">Download</a>
+						and start FTScratchTXT <small>(requires a .NET Framework 4, generally available on Windows PCs)</small>
+					</li>
+					<li>
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">Open</a>
+						ScratchX with upgrade
+						<small>(Firefox or Chrome)</small>
+					</li>
+					<li>Get started!</li>
+				</ol>
+			</div>
+			
+			<div class="content">
+				<h2>Linux/Mac</h2>
+				<ol>
+					<li>
+						Connect ROBOTICS TXT with the PC
+						<small>(USB/WiFi/Bluetooth)</small>
+					</li>
+					<li>
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">Download</a>
+						FTScratchTXT and start with the help of mono.
+						<small>(Console: mono FTScratchTXT.exe)</small>
+					</li>
+					<li>
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">Open</a>
+						ScratchX with upgrade
+						<small>(Firefox or Chrome)</small>
+					</li>
+					<li>Get started!</li>
+				</ol>
+			</div>
+			
+		</section>
+		
+		<section id="blockDescs">
+			<h1>Block description</h1>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onOpenClose.png"/></div>
+				<div class="text">
+					This incident is activated as soon as a switch / reed contact / light barrier is pressed / closed on universal input I1-I8 (or released / opened).
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onCounter.png"/></div>
+				<div class="text">
+					This incident is activated as soon as the number of pulses on counter input C1-C4 is higher / lower than an entered value or a value resulting in combination with blocks from the category "Operators".
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="onInput.png"/></div>
+				<div class="text">
+					This incident is activated as soon as the value of the colour sensor / ultrasound distance sensor / NTC resistance / photo resistance on universal input I1-I8 is higher / lower than an entered value or a value resulting in combination with blocks from the category "Operators".
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getCounter.png"/></div>
+				<div class="text">
+					This block can be used to request the current value of counter input C1-C4 and for calculations or conditions in combination with blocks from the categories "Control", "Operators" and "Incidents". The return value is a 16-Bit value. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getSensor.png"/></div>
+				<div class="text">
+					This block can be used to request the current value of the colour sensor / ultrasound distance sensor / NTC resistance / photo resistance on universal input I1-I8 and for calculations or conditions in combination with blocks from the categories "Control", "Operators" and "Incidents". The return value is a 16-Bit value. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="isClosed.png"/></div>
+				<div class="text">
+					This block is used to request whether a switch / reed contact / light barrier on universal input I1-I8 is pressed / closed (or released / opened). It can be used for calculations or conditions in combination with blocks from the categories "Control", "Operators" and "Incidents". The return is a Boolean value. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySound.png"/></div>
+				<div class="text">
+					Playing the installed sound files 1 - 29 can be started using this block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySoundWait.png"/></div>
+				<div class="text">
+					Playing the installed sound files 1 - 29 can be started using this block. It waits until playing finishes before performing further commands. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetLamp.png"/></div>
+				<div class="text">
+					Output O1 - O8 can be set, e.g. for a lamp, to a value of 0...8 using this block. Values lower than 0 or higher than 8 are cut off at 0 or 8. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetOutput.png"/></div>
+				<div class="text">
+					Output O1 - O8 can be set to a value of 0...8 using this block. Values lower than 0 or higher than 8 are cut off at 0 or 8. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doResetCounter.png"/></div>
+				<div class="text">
+					The current value of counter input C1 - C4 can be reset using this block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeed.png"/></div>
+				<div class="text">
+					Output M1 - M4 can be set, e.g. for a motor, to a value of 0...8 using this block. Values lower than 0 or higher than 8 are cut off at 0 or 8. 
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDir.png"/></div>
+				<div class="text">
+					Output M1 - M4 can be set to forward (backward), e.g. for a motor, with a value of 0...8 using this block. Values lower than 0 or higher than 8 are cut off at 0 or 8.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorDir.png"/></div>
+				<div class="text">
+					Output M1 - M4 can be changed, e.g. for a motor, to forward (backward) using this block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDist.png"/></div>
+				<div class="text">
+					Output M1 - M4 can be set, e.g. for a motor, for a set number of steps and a speed of 1...8, to forward / backward using this block. Output M1 - M4 can only be started again after running the "Stop motor" block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirSync.png"/></div>
+				<div class="text">
+					Two of the outputs M1 - M4 can be set, e.g. for a motor, synchronised with a speed of 1...8, to forward / backward using this block. Outputs M1 - M4 can only be individually started again after running the "Stop motor" block.  
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDistSync.png"/></div>
+				<div class="text">
+					This block is a combination of the two previous blocks. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doStopMotor.png"/></div>
+				<div class="text">
+					A motor on output M1 - M4 can be stopped using this block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doConfigureInput.png"/></div>
+				<div class="text">
+					Universal input I1 - I8 can be changed from digital to analog using this block. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="reset.png"/></div>
+				<div class="text">
+					This block resets the ROBO TXT. All outputs are set to 0. 
+				</div>
+			</div>
+		
+		</section>
+		
+	</body>
+
+</html>

@@ -1,0 +1,235 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>FTScratchTXT</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />	
+	</head>
+	
+	<body>
+		
+		<h1><span style="color:#ed1c24;">FT</span><span style="color:#0071bc;">ScratchTXT</span></h1>
+		
+		<section>
+			<h1>À propos</h1>
+			<div class="content">
+				<img src="http://www.fischertechnik.de/resourceimage.aspx?raid=6851" class="product"/>
+				<b>FTScratchTXT</b>
+				permet d'utiliser le
+				<a href="http://www.fischertechnik.de/desktopdefault.aspx/tabid-21/39_read-309/usetemplate-2_column_pano/">contrôlleur ROBOTICS TXT</a>
+				de fischertechnik sur un PC ou un ordinateur portable avec le langage de programmation facile à apprendre
+				<a href="https://scratch.mit.edu/">Scratch</a>.
+				De cette façon, il est possible de générer en un clin d'œil de petites applications de commande de moteurs et de
+				lampes à l'aide de boutons, de barrières lumineuses et de nombreux autres capteurs. Grâce à la multitude de possibilités
+				offertes par le langage de programmation Scratch, il est également possible de créer des programmes beaucoup plus importants.
+				<br/><br/>
+
+				Les nouvelles extensions Scratch, comme FTScratch, utilisent pour cela la version de développement
+				<a href="http://scratchx.org/">ScratchX</a>.
+			</div>
+		</section>
+		
+		<section>
+		
+			<h1>Manuel</h1>
+			
+			<div class="content">
+				<h2>Windows</h2>
+				<ol>
+					<li>
+						Connecter le ROBOTICS TXT au PC 
+						<small>(USB/WLAN/Bluetooth)</small>
+					</li>
+					<li>
+						Télécharger les pilotes USB (
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5616">32 Bit</a>
+						/
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5617">64 Bit</a>
+						) et les installer
+					</li>
+					<li>
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">Télécharger</a>
+						FTScratchTXT et le démarrer
+						<small>(requiert .NET Framework 4, généralement présent sur les PC sous Windows)</small>
+					</li>
+					<li>
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">Ouvrir</a>
+						ScratchX avec extension
+						<small>(Firefox ou Chrome)</small>
+					</li>
+					<li>C'est parti !</li>
+				</ol>
+			</div>
+			
+			<div class="content">
+				<h2>Linux/Mac</h2>
+				<ol>
+					<li>
+						Connecter le ROBOTICS TXT au PC 
+						<small>(USB/WLAN/Bluetooth)</small>
+					</li>
+					<li>
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">Télécharger</a>
+						FTScratchTXT et le démarrer avec l'aide de mono. 
+						<small>(Console: mono FTScratchTXT.exe)</small>
+					</li>
+					<li>
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">Ouvrir</a>
+						ScratchX avec extension 
+						<small>(Firefox of Chrome)</small>
+					</li>
+					<li>C'est parti !</li>
+				</ol>
+			</div>
+			
+		</section>
+		
+		<section id="blockDescs">
+			<h1>Description des blocs</h1>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onOpenClose.png"/></div>
+				<div class="text">
+					Cet événement est déclenché dès qu'un bouton / un contact Reed / une barrière lumineuse sur une entrée universelle I1-I8 est enfoncé(e) / fermé(e) (ou relâché(e) / ouvert(e)). 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onCounter.png"/></div>
+				<div class="text">
+					Cet événement est déclenché dès que le nombre d'impulsions sur l'entrée de compteur C1-C4 est supérieure / inférieure à une valeur donnée ou à la valeur obtenue en combinaison avec les blocs de la rubrique « Opérateurs ». 
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="onInput.png"/></div>
+				<div class="text">
+					Cet événement est déclenché dès que la valeur du capteur de couleur / du capteur de distance à ultrasons / de la résistance NTC / de la photorésistance sur l'entrée universelle I1-I8 est supérieure / inférieure à une valeur donnée ou à la valeur obtenue en combinaison avec les blocs de la rubrique « Opérateurs ». 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getCounter.png"/></div>
+				<div class="text">
+					Ce bloc permet d'interroger la valeur actuelle de l'entrée du compteur C1-C4 et de l'utiliser pour des calculs ou des conditions en combinaison avec les blocs des rubriques « Commande », « Opérateurs » et « Événements ». La valeur de retour est une valeur 16 bits.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getSensor.png"/></div>
+				<div class="text">
+					Ce bloc permet d'interroger la valeur actuelle du capteur de couleur / du capteur de distance à ultrasons / de la résistance NTC / de la photorésistance sur l'entrée universelle I1-I8 et de l'utiliser pour des calculs ou des conditions en combinaison avec les blocs des rubriques « Commande », « Opérateurs » et « Événements ». La valeur de retour est une valeur 16 bits.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="isClosed.png"/></div>
+				<div class="text">
+					Ce bloc permet de déterminer si un bouton / un contact Reed / une barrière lumineuse sur une entrée universelle I1-I8 est enfoncé(e) / fermé(e) (ou relâché(e) / ouvert(e)). Cette information peut être utilisée pour des calculs ou des conditions en combinaison avec les blocs des rubriques « Commande », « Opérateurs » et « Événements ». Le retour est une valeur booléenne.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySound.png"/></div>
+				<div class="text">
+					Ce bloc permet de lire les fichiers son installés 1 - 29. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySoundWait.png"/></div>
+				<div class="text">
+					Ce bloc permet de lire les fichiers son installés 1 - 29. Le système attend la fin de la lecture avant d'exécuter d'autres commandes.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetLamp.png"/></div>
+				<div class="text">
+					Ce bloc permet de définir la sortie O1 - O8 sur une valeur de 0 à 8 pour une lampe par exemple. Les valeurs inférieures à 0 ou supérieures à 8 sont tronquées à 0 ou 8. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetOutput.png"/></div>
+				<div class="text">
+					Ce bloc permet de définir la sortie O1 - O8 sur une valeur de 0 à 8. Les valeurs inférieures à 0 ou supérieures à 8 sont tronquées à 0 ou 8. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doResetCounter.png"/></div>
+				<div class="text">
+					Ce bloc permet de réinitialiser la valeur actuelle de l'entrée du compteur C1 - C4.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeed.png"/></div>
+				<div class="text">
+					Ce bloc permet de définir la sortie M1 - M4 sur une valeur de 0 à 8 pour un moteur par exemple. Les valeurs inférieures à 0 ou supérieures à 8 sont tronquées à 0 ou 8.
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDir.png"/></div>
+				<div class="text">
+					Ce bloc permet de faire avancer (ou reculer) la sortie M1 - M4 avec une valeur de 0 à 8 pour un moteur par exemple. Les valeurs inférieures à 0 ou supérieures à 8 sont tronquées à 0 ou 8.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorDir.png"/></div>
+				<div class="text">
+					Ce bloc permet de modifier la sortie M1 - M4 vers l'avant (ou l'arrière) pour un moteur par exemple. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDist.png"/></div>
+				<div class="text">
+					Ce bloc permet de faire avancer / reculer la sortie M1 - M4 par exemple pour un moteur avec un nombre réglable de pas et une vitesse de 1 à 8. La sortie M1 - M4 ne peut être redémarrée qu'après l'exécution du bloc « Arrêt moteur ».
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirSync.png"/></div>
+				<div class="text">
+					Ce bloc permet de faire avancer / reculer les sorties M1 - M4 par exemple pour un moteur synchrone avec une vitesse de 1 à 8. Les sorties M1 - M4 ne peuvent être redémarrées qu'après l'exécution du bloc « Arrêt moteur ».
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDistSync.png"/></div>
+				<div class="text">
+					Ce bloc est une combinaison des deux blocs précédents.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doStopMotor.png"/></div>
+				<div class="text">
+					Ce bloc permet d'arrêter un moteur sur la sortie M1 - M4. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doConfigureInput.png"/></div>
+				<div class="text">
+					Ce bloc permet de commuter l'entrée universelle I1 - I8 de la position numérique à la position analogique.
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="reset.png"/></div>
+				<div class="text">
+					Ce bloc réinitialise le ROBO TXT. Toutes les sorties sont réglées sur 0. 
+				</div>
+			</div>
+		
+		</section>
+		
+	</body>
+
+</html>

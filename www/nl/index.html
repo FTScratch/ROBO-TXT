@@ -1,0 +1,243 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>FTScratchTXT</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />	
+	</head>
+	
+	<body>
+		
+		<h1><span style="color:#ed1c24;">FT</span><span style="color:#0071bc;">ScratchTXT</span></h1>
+		
+		<section>
+			<h1>Over</h1>
+			<div class="content">
+				<img src="http://www.fischertechnik.de/resourceimage.aspx?raid=6851" class="product"/>
+				<b>FTScratchTXT</b>
+				maakt op PC's c.q. notebooks het gebruik  van de fischertechnik
+				<a href="http://www.fischertechnik.de/desktopdefault.aspx/tabid-21/39_read-309/usetemplate-2_column_pano/">ROBOTICS TXT Controller </a>
+				in combinatie met de eenvoudig aan te leren programmeertaal
+				<a href="https://scratch.mit.edu/">Scratch</a>
+				mogelijk.
+				Zo kunnen in een handomdraai kleine toepassingen voor het besturen van motoren en lampen door middel van schakelaars,
+				fotocellen en vele soorten sensoren worden geschreven. Door de vele mogelijkheden die de programmeertaal Scratch biedt,
+				kunnen ook veel grotere programma's worden geschreven.
+				<br/><br/>
+
+				Nieuwe Scratch-uitbreidingen, zoals FTScratch, gebruiken hiervoor de versie voor ontwikkelaars
+				<a href="http://scratchx.org/">ScratchX</a>.
+			</div>
+		</section>
+		
+		<section>
+		
+			<h1>HowTo</h1>
+			
+			<div class="content">
+				<h2>Windows</h2>
+				<ol>
+					<li>
+						ROBOTICS TXT met de PC verbinden
+						<small>(USB/WLAN/Bluetooth)</small>
+					</li>
+					<li>
+						USB-drivers downloaden (
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5616">32 Bit</a>
+						/
+						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5617">64 Bit</a>
+						) en installeren
+					</li>
+					<li>
+						FTScratchTXT
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">downloaden</a>
+						en opstarten
+						<small>(Daarvoor moet .NET Framework 4 meestal op Windows PC’s geïnstalleerd zijn)</small>
+					</li>
+					<li>
+						ScratchX met uitbreiding
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">openen</a>
+						
+						<small>(Firefox of Chrome)</small>
+					</li>
+					<li>En aan het werk!</li>
+				</ol>
+			</div>
+			
+			<div class="content">
+				<h2>Linux/Mac</h2>
+				<ol>
+					<li>
+						ROBOTICS TXT met de PC verbinden
+						<small>(USB/WLAN/Bluetooth)</small>
+					</li>
+					<li>
+						FTScratchTXT
+						<a href="http://ftscratch.github.io/ROBO-TXT/bin/FTScratchTXT.exe">downloaden</a>
+						en met behulp van mono starten.
+						<small>(Console: mono FTScratchTXT.exe)</small>
+					</li>
+					<li>
+						ScratchX met uitbreiding
+						<a href="http://scratchx.org/?url=http://ftscratch.github.io/ROBO-TXT/src/ext.js#scratch">openen</a>
+		
+						<small>(Firefox of Chrome)</small>
+					</li>
+					<li>En aan het werk!</li>
+				</ol>
+			</div>
+			
+		</section>
+		
+		<section id="blockDescs">
+			<h1>Blokbeschrijving</h1>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onOpenClose.png"/></div>
+				<div class="text">
+					Deze gebeurtenis wordt geactiveerd zodra een schakelaar/reed-contact/fotocel op de universele ingang I1-I8 ingedrukt/gesloten (of losgelaten/geopend) wordt. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="onCounter.png"/></div>
+				<div class="text">
+					Deze gebeurtenis wordt geactiveerd zodra een aantal impulsen op de telleringang C1-C4 groter/kleiner wordt dan een ingevoerde waarde c.q. in combinatie met blokken uit de rubriek „Operatoren“ ontstane waarde. 
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="onInput.png"/></div>
+				<div class="text">
+					Deze gebeurtenis wordt geactiveerd zodra de waarde van de kleurensensor/ultrasoon afstandssensor/NTC-weerstand/fotoweerstand op de universele ingang I1-I8 groter/kleiner wordt dan een ingevoerde waarde c.q. in combinatie met blokken uit de rubriek „Operatoren“ ontstane waarde. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getCounter.png"/></div>
+				<div class="text">
+					Via dit blok kan de actuele waarde van de telleringang C1-C4 worden opgevraagd en voor berekeningen of omstandigheden in combinatie met de blokken uit de rubrieken "Besturing", "Operatoren" en "Gebeurtenissen" worden gebruikt. De retourwaarde is een 16-bit waarde. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="getSensor.png"/></div>
+				<div class="text">
+					Via dit blok kan de actuele waarde van de kleurensensor/ultrasoon afstandssensor/NTC-weerstand/fotoweerstand op de universele ingang I1-I8 worden opgevraagd en voor berekeningen of omstandigheden in combinatie met de blokken uit de rubrieken "Besturing", "Operatoren" en "Gebeurtenissen" worden gebruikt. De retourwaarde is een 16-bit waarde. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="isClosed.png"/></div>
+				<div class="text">
+					Via dit blok wordt opgevraagd of een schakelaar/reed-contact/fotocel op de universele ingang I1-I8 ingedrukt/gesloten (of losgelaten/geopend) is. Kan voor berekeningen of omstandigheden in combinatie met blokken uit de rubrieken "Besturing", "Operatoren" en "Eigenschappen" worden gebruikt. De retour is een Booleaanse waarde. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySound.png"/></div>
+				<div class="text">
+					Via dit blok kan het afspelen van de geïnstalleerde geluidsbestanden 1 - 29 worden gestart. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doPlaySoundWait.png"/></div>
+				<div class="text">
+					Via dit blok kan het afspelen van de geïnstalleerde geluidsbestanden 1 - 29 worden gestart. Er wordt gewacht tot het afspelen is beëindigd voordat verdere commando's worden uitgevoerd. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetLamp.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang O1 - O8 voor bijv. een lamp op een waarde van 0 - 8 worden ingesteld. Waarden kleiner dan 0 c.q. groter dan 8 worden op 0 c.q. 8 ingesteld. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetOutput.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang O1 - O8 op een waarden van 0 - 8 worden ingesteld. Waarden kleiner dan 0 c.q. groter dan 8 worden op 0 c.q. 8 ingesteld. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doResetCounter.png"/></div>
+				<div class="text">
+					Via dit blok kan de actuele waarde van de telleringang C1 - C4 worden gereset. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeed.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang M1 - M4 voor bijv. een motor op een waarde van 0 - 8 worden ingesteld. Waarden kleiner dan 0 c.q. groter dan 8 worden op 0 c.q. 8 ingesteld. 
+				</div>
+			</div>
+		
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDir.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang M1 - M4 voor bijv. een motor op vooruit (achteruit) met een waarde van 0 - 8 worden ingesteld. Waarden kleiner dan 0 c.q. groter dan 8 worden op 0 c.q. 8 ingesteld. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorDir.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang M1 - M4 voor bijv. een motor naar vooruit (achteruit) worden veranderd
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDist.png"/></div>
+				<div class="text">
+					Via dit blok kan de uitgang M1 - M4 voor bijv. een motor gedurende een instelbaar aantal stappen en een snelheid van 1 - 8 op vooruit/achteruit worden ingesteld. Pa nadat het blok „Stop motor" is uitgevoerd kan uitgang M1 - M4 opnieuw worden gestart. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirSync.png"/></div>
+				<div class="text">
+					Via dit blok kunnen telkens twee van de uitgangen M1 - M4 voor bijv. een motor synchroon met een snelheid van 1 - 8 op vooruit/achteruit worden ingesteld. Pas nadat het blok „Stop motor" is uitgevoerd kunnen de uitgangen M1 - M4 opnieuw individueel worden gestart. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doSetMotorSpeedDirDistSync.png"/></div>
+				<div class="text">
+					Dit blok is een combinatie van de beide voorgaande blokken. 
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doStopMotor.png"/></div>
+				<div class="text">
+					Via dit blok kan een motor op de uitgang M1 - M4 worden gestopt. 
+
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="doConfigureInput.png"/></div>
+				<div class="text">
+					Via dit blok kan de universele ingang I1 - I8 van digitaal naar analoog worden omgeschakeld. 
+
+				</div>
+			</div>
+			
+			<div class="blockDesc">
+				<div class="image"><img src="reset.png"/></div>
+				<div class="text">
+					Met dit blok wordt de ROBO TXT gereset. Alle uitgangen worden op 0 ingesteld. 
+
+				</div>
+			</div>
+		
+		</section>
+		
+	</body>
+
+</html>
