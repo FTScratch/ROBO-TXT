@@ -10,6 +10,7 @@ var IO = {
 	// request timeout after x msec
 	timeout: 500,
 
+
 	// get the current time as string
 	getTimeString: function() {
 		var d = new Date();
@@ -33,12 +34,16 @@ var IO = {
 
 	// POST the given command and corresponding values to the host application
 	doPost: function(command, values) {
+		var json = JSON.stringify(values);
+		this.doPostJson(command, json);
+	},
+	doPostJson: function(command, json) {
 		return $.ajax({
-              async: true,
+              async: false,					// seems a lot more stable in scratch
 			  url: this.host + command,
               dataType: 'json',
 			  method: 'POST',
-			  data: JSON.stringify(values),
+			  data: json,
 			  crossDomain: true,
         });
 	},

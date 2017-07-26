@@ -18,7 +18,7 @@
 	
 	// reset the device
 	ext.reset = function() {
-		IO.doPost('reset', null);
+		IO.doPostJson('reset', null);
 	};
 	
 	
@@ -88,6 +88,15 @@
 			for (var i = 0; i < 8; ++i) {this.inputs[i].transmitted();}
 			for (var i = 0; i < 4; ++i) {this.counters[i].transmitted();}
 		},
+		
+		needsUpdate: function() {
+			var needsUpdate = false;
+			for (var i = 0; i < 4; ++i) {needsUpdate |= this.motors[i].mod;}
+			for (var i = 0; i < 8; ++i) {needsUpdate |= this.outputs[i].mod;}
+			for (var i = 0; i < 8; ++i) {needsUpdate |= this.inputs[i].mod;}
+			for (var i = 0; i < 4; ++i) {needsUpdate |= this.counters[i].mod;}
+			return needsUpdate;
+		}
 		
 	};
 	
@@ -212,24 +221,80 @@
 		
 	
 
-	
+	ext.updateIfNeeded = function() {
+		if (ext.output.needsUpdate()) {
+			ext.doUpdate(null);
+		}
+	};
 	
 	// update the current sensor values from the device
 	ext.doUpdate = function() {
 
-		var params = ext.output;
+		// get parameters as json
+		var json = JSON.stringify(ext.output);
 		
-		IO.doPost('update', params)
+		// mark as transmitted
+		ext.output.transmitted();
+		
+		// transmit
+		IO.doPostJson('update', json)
 			.done(function(data) {
 				ext.input.oldValues = ext.input.curValues;
 				ext.input.curValues = data;
-				ext.output.transmitted();
 			})
 			.fail(function( xhr, status, err ) {
 				console.log(err);						// DEBUG
 			});
 	
 	};
+	
+	
+	/*
+	ext.doSetCurrent = function() {
+		
+		// get parameters as json
+		var json = JSON.stringify(ext.output);
+		
+		// mark as transmitted
+		ext.output.transmitted();
+		
+		// transmit
+		IO.doPostJson('set', json)
+			.done(function(data) {
+				;
+			})
+			.fail(function( xhr, status, err ) {
+				console.log(err);						// DEBUG
+			});
+		
+	}
+	*/
+	
+	ext.doGetCurrent = function(onDoneCallback) {
+		
+		// get current values
+		IO.doGet('current')
+			.done(function(data) {
+				ext.input.oldValues = ext.input.curValues;
+				ext.input.curValues = data;
+				//onDoneCallback();
+			})
+			.fail(function( xhr, status, err ) {
+				console.log(err);						// DEBUG
+				//onDoneCallback();
+			});
+	
+	};
+	
+	
+	
+	
+	
+	
+	/** commands */
+	
+	
+	
 	
 	
 	
@@ -255,22 +320,26 @@
 	/** set the lamp at the given output to the provided value [0:8] */
 	ext.doSetLamp = function(outputName, value) {
 		ext._setOutput08(outputName, value);
+		ext.updateIfNeeded();
 	};
 	
 	/** set the given Output 'Ox' to the provided value [0:8] */
 	ext.doSetOutput = function(outputName, value) {
 		ext._setOutput08(outputName, value);
+		ext.updateIfNeeded();
 	};
 	
 	
 	/** adjust the given motor's speed */
 	ext.doSetMotorSpeed = function(motorName, value) {
 		ext._setMotorSpeed08(motorName, value);
+		ext.updateIfNeeded();
 	};
 	
 	/** adjust the given motor's direction */
 	ext.doSetMotorDir = function(motorName, dirName) {
 		ext._setMotorDir(motorName, dirName);
+		ext.updateIfNeeded();
 	};
 	
 	
@@ -278,6 +347,7 @@
 	ext.doSetMotorSpeedDir = function(motorName, value, dirName) {
 		ext._setMotorDir(motorName, dirName);
 		ext._setMotorSpeed08(motorName, value);
+		ext.updateIfNeeded();
 	};
 	
 	/** let the given motor move "steps" steps into the given direction with the provided speed */
@@ -286,6 +356,7 @@
 		ext._setMotorDist(motorName, steps);
 		ext._setMotorDir(motorName, dirName);
 		ext._setMotorSpeed08(motorName, value);
+		ext.updateIfNeeded();
 	};
 	
 	/** synchronize the two given motors */
@@ -296,6 +367,7 @@
 		ext._setMotorDir(motor2Name, dirName);
 		ext._setMotorSpeed08(motor1Name, value);
 		ext._setMotorSpeed08(motor2Name, value);
+		ext.updateIfNeeded();
 	};
 	
 	/** synchronize the two given motors with distance */
@@ -307,6 +379,7 @@
 		ext._setMotorDir(motor2Name, dirName);
 		ext._setMotorSpeed08(motor1Name, value);
 		ext._setMotorSpeed08(motor2Name, value);
+		ext.updateIfNeeded();
 	};
 	
 		
@@ -315,12 +388,14 @@
 		ext._setMotorSpeed08(motorName, 0);		// set speed to 0
 		ext._setMotorDist(motorName, 0);		// remove distance limits
 		ext._setMotorSyncNone(motorName);		// remove sync constraints
+		ext.updateIfNeeded();
 	};
 	
 	/** reset the given counter to zero */
 	ext.doResetCounter = function(counterName) {
 		var idx = ext._counterNameToIdx(counterName);
 		ext.output.counters[idx].doReset();
+		ext.updateIfNeeded();
 	};
 	
 	/** expert config: input -> mode */
@@ -328,7 +403,13 @@
 		console.log(inputName + " - " + inputMode);
 		var idx = ext._inputModeToIdx(inputMode);
 		ext._setSensorMode(inputName, idx);
+		ext.updateIfNeeded();
 	};
+	
+	
+	
+	
+	
 	
 	
 	
@@ -344,6 +425,7 @@
 		
 		// ensure correct (analog) working mode
 		ext._adjustInputModeAnalog(inputName, sensorType);
+		ext.updateIfNeeded();
 		
 		// get value
 		var idx = ext._inputNameToIdx(inputName);
@@ -357,6 +439,7 @@
 		// ensure inputName uses the correct configuration
 		//ext._setSensorMode(inputName, 1);		// DIGITAL_5KOHM
 		ext._adjustInputModeDigital(inputName, sensorType);
+		ext.updateIfNeeded();
 		
 		// fetch
 		var idx = ext._inputNameToIdx(inputName);
@@ -370,6 +453,7 @@
 				
 		// ensure correct working mode
 		ext._adjustInputModeAnalog(inputName, sensorType);
+		ext.updateIfNeeded();
 		
 		// get index
 		var idx = ext._inputNameToIdx(inputName);
@@ -394,6 +478,7 @@
 		// ensure inputName uses the correct configuration
 		//ext._setSensorMode(inputName, 1);		// DIGITAL_5KOHM
 		ext._adjustInputModeDigital(inputName, sensorType);
+		ext.updateIfNeeded();
 		
 		// check both directions
 		var idx = ext._inputNameToIdx(inputName);
@@ -504,8 +589,17 @@
 	ScratchExtensions.register('fischertechnik ROBO-TXT', descriptor, ext);
 	//alert(1);
 	
-	// start the update loop: periodically fetch sensor values from the device
-	setInterval(ext.doUpdate, 60);
+	// start the update loop: periodically fetch sensor values from the device and push current values to the device
+	setInterval(ext.doGetCurrent, 100);
+	
+//	alert(123);
+//	var connection = new WebSocket('ws://html5rocks.websocket.org/echo', ['soap', 'xmpp']);
+//	alert(connection);
+	
+	//var nextUpdate = function() {
+	//	setTimeout(ext.doGetCurrent(nextUpdate, 500));
+	//};
+	//nextUpdate();
 	
 	// ensure the ROBO LT is reset
 	ext.reset();
