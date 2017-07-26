@@ -261,7 +261,47 @@ var Lang = {
 			mode_d10v: 'Tensão digital',
 			mode_ultrasonic: 'Ultrassons',
 			reset: 'repor'
-		}
+		},
+		
+		he: {
+			onOpenClose: 'אם %m.openCloseSensors %m.inputs %m.openClose',
+			onCounter: 'אם ערכו של מונה %m.counters %m.compares %n',
+			onInput: 'אם ערכו של %m.inputSensors %n %m.compares %m.inputs',
+			isClosed: 'האם %m.openCloseSensors %m.inputs סגור',
+			getCounter: 'קרא ערכו של מונה %m.counters',
+			getSensor: 'קרא ערכו של %m.inputSensors %m.inputs',
+			doPlaySound: 'נגן צליל %n',
+			doPlaySoundWait: 'נגן צליל %n עד לסיומו',
+			doSetLamp: 'קבע עוצמת נורה %m.outputs ל %n',
+			doSetOutput: 'הגדר פלט %m.outputs לעוצמה %n',
+			doResetCounter: 'אפס מונה %m.counters',
+			doSetMotorSpeed: 'קבע מהירות מנוע %m.motors ל %n',
+			doSetMotorSpeedDir: 'קבע מהירות מנוע %m.motors ל %n %m.motorDirections',
+			doSetMotorDir: 'קבע כיוון מנוע %m.motors ל %m.motorDirections',
+			doSetMotorSpeedDirDist: 'הזז מנוע %m.motors למרחק %n צעדים במהירות %n %m.motorDirections',
+			doSetMotorSpeedDirSync: 'הזז מנועים %m.motors וגם  %m.motors במהירות %n %m.motorDirections',
+			doSetMotorSpeedDirDistSync: 'הזז מנועים %m.motors וגם %m.motors למרחק %n צעדים במהירות %n %m.motorDirections',
+			doStopMotor: 'עצור מנוע %m.motors',
+			doConfigureInput: 'הגדר סוג קלט %m.inputs ל %m.inputModes',
+			dir_forward: 'קדימה',
+			dir_backwards: 'אחורה',
+			sens_color: 'חיישן צבע',
+			sens_distance: 'חיישן מרחק',
+			sens_ntc: 'חיישן טמפרטורה',
+			sens_photo: 'חיישן אור',
+			sens_lightBarrier: 'מחסום אור',
+			sens_button: 'מתג',
+			sens_reed: 'חיישן מגנטיות',
+			sens_IR: 'חיישן אינפרה-רד',
+			openclose_opens: 'נפתח',
+			openclose_closes: 'נסגר',
+			mode_a5k: 'התנגדות אנלוגית',
+			mode_d5k: 'התנגדות דיגיטלית',
+			mode_a10v: 'מתח אנלוגי',
+			mode_d10v: 'מתח דיגיטלי',
+			mode_ultrasonic: 'אולטרהסוניק',
+			reset: 'איפוס'
+} 
 				
 	},	
 	
