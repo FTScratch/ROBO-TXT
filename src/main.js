@@ -8,17 +8,20 @@
 	ext.oldValues = null;
 		
 	// Cleanup function when the extension is unloaded
-	ext._shutdown = function() {};
+	ext._shutdown = function() {
+		connection.close();
+	};
 	
 	// Status reporting code
 	// Use this to report missing hardware, plugin or unsupported browser
 	ext._getStatus = function() {
-		return IO.updateStatus();
+		connection.ping();
+		return connection.status;
 	};
 	
 	// reset the device
 	ext.reset = function() {
-		IO.doPostJson('reset', null);
+		connection.reset();
 	};
 	
 	
@@ -49,6 +52,7 @@
 			var changed = this.mode != newMode;
 			this.mode = newMode;
 			if (changed) {this.mod = true;}
+			//console.log(this.mode + ":" + newMode + ":" + changed + " - " + this.mod);
 		}
 		this.transmitted = function() {
 			this.mod = false;
@@ -102,10 +106,8 @@
 	
 	// received state
 	ext.input = {
-		
 		curValues:	{},
 		oldValues:	{},
-		
 	}
 	
 	// convert Output name to array index: '04' -> 3
@@ -136,7 +138,7 @@
 	
 	// convert input-mode to value 'd10v' -> 0
 	ext._inputModeToIdx = function(inputMode) {
-		console.log(inputMode);
+		//console.log(inputMode);
 		if (inputMode == Lang.getMode('d10v'))			{return 0;}
 		if (inputMode == Lang.getMode('d5k'))			{return 1;}
 		if (inputMode == Lang.getMode('a10v'))			{return 2;}
@@ -223,92 +225,25 @@
 
 	ext.updateIfNeeded = function() {
 		if (ext.output.needsUpdate()) {
-			ext.doUpdate(null);
+			connection.send("ACTU", ext.output);
+			ext.output.transmitted();
 		}
 	};
-	
-	// update the current sensor values from the device
-	ext.doUpdate = function() {
-
-		// get parameters as json
-		var json = JSON.stringify(ext.output);
 		
-		// mark as transmitted
-		ext.output.transmitted();
-		
-		// transmit
-		IO.doPostJson('update', json)
-			.done(function(data) {
-				ext.input.oldValues = ext.input.curValues;
-				ext.input.curValues = data;
-			})
-			.fail(function( xhr, status, err ) {
-				console.log(err);						// DEBUG
-			});
-	
-	};
-	
-	
-	/*
-	ext.doSetCurrent = function() {
-		
-		// get parameters as json
-		var json = JSON.stringify(ext.output);
-		
-		// mark as transmitted
-		ext.output.transmitted();
-		
-		// transmit
-		IO.doPostJson('set', json)
-			.done(function(data) {
-				;
-			})
-			.fail(function( xhr, status, err ) {
-				console.log(err);						// DEBUG
-			});
-		
-	}
-	*/
-	
-	ext.doGetCurrent = function(onDoneCallback) {
-		
-		// get current values
-		IO.doGet('current')
-			.done(function(data) {
-				ext.input.oldValues = ext.input.curValues;
-				ext.input.curValues = data;
-				//onDoneCallback();
-			})
-			.fail(function( xhr, status, err ) {
-				console.log(err);						// DEBUG
-				//onDoneCallback();
-			});
-	
-	};
-	
-	
-	
-	
 	
 	
 	/** commands */
 	
 	
-	
-	
-	
-	
-	
+
 	/** play the given sound */
 	ext.doPlaySound = function(sndIdx) {
-		var cfg = {idx: sndIdx};
-		IO.doPost("sound", cfg);
+		connection.playSound(sndIdx);
 	};
 	
 	/** play the given sound and call the callback as soon as it finished */
 	ext.doPlaySoundWait = function(sndIdx, callback) {
-		var cfg = {idx: sndIdx};
-		IO.doPost("sound", cfg);
+		connection.playSound(sndIdx);
 		var id = window.setInterval(function() {
 			if (!ext.input.curValues.isPlaying) {
 				window.clearInterval(id);
@@ -400,7 +335,6 @@
 	
 	/** expert config: input -> mode */
 	ext.doConfigureInput = function(inputName, inputMode) {
-		console.log(inputName + " - " + inputMode);
 		var idx = ext._inputModeToIdx(inputMode);
 		ext._setSensorMode(inputName, idx);
 		ext.updateIfNeeded();
@@ -437,7 +371,6 @@
 	ext.isClosed = function(sensorType, inputName) {
 		
 		// ensure inputName uses the correct configuration
-		//ext._setSensorMode(inputName, 1);		// DIGITAL_5KOHM
 		ext._adjustInputModeDigital(inputName, sensorType);
 		ext.updateIfNeeded();
 		
@@ -527,7 +460,7 @@
 			['r', Lang.get('getCounter'),					'getCounter',					'C1'],
 			['r', Lang.get('getSensor'),					'getSensor',					Lang.getSensor('color'), 'I1'],
 			
-			['r', Lang.get('isClosed'),						'isClosed',						Lang.getSensor('button'), 'I1'],
+			['b', Lang.get('isClosed'),						'isClosed',						Lang.getSensor('button'), 'I1'],
 			
 			
 			// sets
@@ -583,26 +516,23 @@
 		
 	};
 	
-
+	/** IO via WebSockets */
 	
 	// Register the extension
 	ScratchExtensions.register('fischertechnik ROBO-TXT', descriptor, ext);
-	//alert(1);
 	
-	// start the update loop: periodically fetch sensor values from the device and push current values to the device
-	setInterval(ext.doGetCurrent, 100);
+	// connection established
+	ext.onConnect = function() {
+		
+		// ensure the ROBO LT is reset
+		ext.reset();
 	
-//	alert(123);
-//	var connection = new WebSocket('ws://html5rocks.websocket.org/echo', ['soap', 'xmpp']);
-//	alert(connection);
+	}
 	
-	//var nextUpdate = function() {
-	//	setTimeout(ext.doGetCurrent(nextUpdate, 500));
-	//};
-	//nextUpdate();
+	var connection = new ScratchConnection("ws://127.0.0.1:8001/api", ext);	// edge/ie need the IP here
+	connection.connect();
 	
-	// ensure the ROBO LT is reset
-	ext.reset();
 	
+
 })({});
 
