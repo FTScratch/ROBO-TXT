@@ -22,6 +22,7 @@
 	// reset the device
 	ext.reset = function() {
 		connection.reset();
+		ext.output.init();
 	};
 	
 	
@@ -34,6 +35,7 @@
 		this.dist = -10;		// -10 = no change, 0 = no distance limit, >0 = distance limit
 		this.modified =			function() {this.mod = true;}
 		this.transmitted =		function() {this.mod = false; this.sync = -10; this.dist = -10;}
+		this.init =				function() {this.speed = 0; this.dir = 1; this.sync = -10; this.dist = -10;}
 	};
 	
 	// describes one output (value)
@@ -42,6 +44,7 @@
 		this.val = 0;
 		this.modified =			function() {this.mod = true;}
 		this.transmitted =		function() {this.mod = false;}
+		this.init = 			function() {this.val = 0;}
 	};
 	
 	// describes one input-configuration (mode)
@@ -54,22 +57,17 @@
 			if (changed) {this.mod = true;}
 			//console.log(this.mode + ":" + newMode + ":" + changed + " - " + this.mod);
 		}
-		this.transmitted = function() {
-			this.mod = false;
-		}
+		this.transmitted = 	function() {this.mod = false;}
+		this.init =			function() {this.mode = -1;}
 	};
 	
 	// describes one counter-configuration
 	function Counter() {
 		this.mod = false;
 		this.rst = false;
-		this.doReset = function() {
-			this.rst = true;
-			this.mod = true;
-		}
-		this.transmitted = function() {
-			this.mod = false;
-		}
+		this.doReset =		function() {this.rst = true; this.mod = true;}
+		this.transmitted =	function() {this.mod = false;}
+		this.init =			function() {this.rst = false;}
 	}
 	
 	Motor.prototype.toString = function motorToString() {
@@ -100,7 +98,15 @@
 			for (var i = 0; i < 8; ++i) {needsUpdate |= this.inputs[i].mod;}
 			for (var i = 0; i < 4; ++i) {needsUpdate |= this.counters[i].mod;}
 			return needsUpdate;
-		}
+		},
+		
+		// reset to initial state
+		init: function() {
+			for (var i = 0; i < 4; ++i) {this.motors[i].init();}
+			for (var i = 0; i < 8; ++i) {this.outputs[i].init();}
+			for (var i = 0; i < 8; ++i) {this.inputs[i].init();}
+			for (var i = 0; i < 4; ++i) {this.counters[i].init();}
+		},
 		
 	};
 	
@@ -521,13 +527,21 @@
 	// Register the extension
 	ScratchExtensions.register('fischertechnik ROBO-TXT', descriptor, ext);
 	
-	// connection established
+	// connected to FTScratchTXT.exe
 	ext.onConnect = function() {
 		
 		// ensure the ROBO LT is reset
 		ext.reset();
 	
-	}
+	};
+	
+	// connected to a TXT
+	ext.onConnectTXT = function() {
+	
+		// ensure the internal state is reset as the TXT's state is also reset!
+		ext.output.init();
+	
+	};
 	
 	var connection = new ScratchConnection("ws://127.0.0.1:8001/api", ext);	// edge/ie need the IP here
 	connection.connect();
