@@ -15,7 +15,11 @@
 	// Status reporting code
 	// Use this to report missing hardware, plugin or unsupported browser
 	ext._getStatus = function() {
-		connection.ping();
+    try {
+		  connection.ping();
+    } catch (err) {
+      ;    // not yet connected. no problem
+    }
 		return connection.status;
 	};
 	
@@ -522,11 +526,6 @@
 		
 	};
 	
-	/** IO via WebSockets */
-	
-	// Register the extension
-	ScratchExtensions.register('fischertechnik ROBO-TXT', descriptor, ext);
-	
 	// connected to FTScratchTXT.exe
 	ext.onConnect = function() {
 		
@@ -545,8 +544,9 @@
 	
 	var connection = new ScratchConnection("ws://127.0.0.1:8001/api", ext);	// edge/ie need the IP here
 	connection.connect();
-	
-	
+ 
+  // Register the extension
+	ScratchExtensions.register('fischertechnik ROBO-TXT', descriptor, ext);
 
 })({});
 
