@@ -15,10 +15,10 @@
 	// Status reporting code
 	// Use this to report missing hardware, plugin or unsupported browser
 	ext._getStatus = function() {
-    try {
-		  connection.ping();
-    } catch (err) {
-      ;    // not yet connected. no problem
+	try {
+		connection.ping();
+	} catch (err) {
+		;    // not yet connected. no problem
     }
 		return connection.status;
 	};
@@ -239,6 +239,14 @@
 			ext.output.transmitted();
 		}
 	};
+	
+	/** txt finished playing a sound */
+	ext.onSoundDone = function() {
+		if (ext.soundCallback) {
+			ext.soundCallback();
+			ext.soundCallback = null;
+		}
+	};
 		
 	
 	
@@ -253,13 +261,17 @@
 	
 	/** play the given sound and call the callback as soon as it finished */
 	ext.doPlaySoundWait = function(sndIdx, callback) {
+		
+		// prevent blocking 2 sound-blocks at the same time
+		if (ext.soundCallback) {
+			callback();
+			return;
+		}
+		
+		// remember the callback (see onSoundDone())
+		ext.soundCallback = callback;
 		connection.playSound(sndIdx);
-		var id = window.setInterval(function() {
-			if (!ext.input.curValues.isPlaying) {
-				window.clearInterval(id);
-				callback();
-			}			
-		}, 200);
+		
 	};
 	
 	/** set the lamp at the given output to the provided value [0:8] */
@@ -332,7 +344,7 @@
 	ext.doStopMotor = function(motorName) {
 		ext._setMotorSpeed08(motorName, 0);		// set speed to 0
 		ext._setMotorDist(motorName, 0);		// remove distance limits
-		ext._setMotorSyncNone(motorName);		// remove sync constraints
+		//ext._setMotorSyncNone(motorName);		// remove sync constraints
 		ext.updateIfNeeded();
 	};
 	

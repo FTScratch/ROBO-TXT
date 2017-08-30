@@ -376,11 +376,13 @@ function ScratchConnection(url, ext) {
 		
 		var messageType = message.data.substring(0, 4);
 		var messageData = message.data.substring(4);
-		var data = JSON.parse(messageData);
+		var data = (messageData) ? (JSON.parse(messageData)) : null;
 				
 		if (messageType === "SENS") {
 			ext.input.oldValues = ext.input.curValues;
 			ext.input.curValues = data;
+		} else if (messageType === "SDON") {
+			ext.onSoundDone();
 		} else if (messageType == "PONG") {
 			var dev = data[0];
 			var devChanged = dev != _this.curDev;
@@ -516,10 +518,10 @@ var IO = {
 	// Status reporting code
 	// Use this to report missing hardware, plugin or unsupported browser
 	ext._getStatus = function() {
-    try {
-		  connection.ping();
-    } catch (err) {
-      ;    // not yet connected. no problem
+	try {
+		connection.ping();
+	} catch (err) {
+		;    // not yet connected. no problem
     }
 		return connection.status;
 	};
@@ -740,6 +742,14 @@ var IO = {
 			ext.output.transmitted();
 		}
 	};
+	
+	/** txt finished playing a sound */
+	ext.onSoundDone = function() {
+		if (ext.soundCallback) {
+			ext.soundCallback();
+			ext.soundCallback = null;
+		}
+	};
 		
 	
 	
@@ -754,13 +764,17 @@ var IO = {
 	
 	/** play the given sound and call the callback as soon as it finished */
 	ext.doPlaySoundWait = function(sndIdx, callback) {
+		
+		// prevent blocking 2 sound-blocks at the same time
+		if (ext.soundCallback) {
+			callback();
+			return;
+		}
+		
+		// remember the callback (see onSoundDone())
+		ext.soundCallback = callback;
 		connection.playSound(sndIdx);
-		var id = window.setInterval(function() {
-			if (!ext.input.curValues.isPlaying) {
-				window.clearInterval(id);
-				callback();
-			}			
-		}, 200);
+		
 	};
 	
 	/** set the lamp at the given output to the provided value [0:8] */
@@ -833,7 +847,7 @@ var IO = {
 	ext.doStopMotor = function(motorName) {
 		ext._setMotorSpeed08(motorName, 0);		// set speed to 0
 		ext._setMotorDist(motorName, 0);		// remove distance limits
-		ext._setMotorSyncNone(motorName);		// remove sync constraints
+		//ext._setMotorSyncNone(motorName);		// remove sync constraints
 		ext.updateIfNeeded();
 	};
 	

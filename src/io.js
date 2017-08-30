@@ -45,11 +45,13 @@ function ScratchConnection(url, ext) {
 		
 		var messageType = message.data.substring(0, 4);
 		var messageData = message.data.substring(4);
-		var data = JSON.parse(messageData);
+		var data = (messageData) ? (JSON.parse(messageData)) : null;
 				
 		if (messageType === "SENS") {
 			ext.input.oldValues = ext.input.curValues;
 			ext.input.curValues = data;
+		} else if (messageType === "SDON") {
+			ext.onSoundDone();
 		} else if (messageType == "PONG") {
 			var dev = data[0];
 			var devChanged = dev != _this.curDev;
