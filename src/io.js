@@ -50,9 +50,11 @@ function ScratchConnection(url, ext) {
 		if (messageType === "SENS") {
 			ext.input.oldValues = ext.input.curValues;
 			ext.input.curValues = data;
+			ext.onNewInputs();
 		} else if (messageType === "SDON") {
 			ext.onSoundDone();
 		} else if (messageType == "PONG") {
+			ext.onPong();
 			var dev = data[0];
 			var devChanged = dev != _this.curDev;
 			_this.curDev = dev;

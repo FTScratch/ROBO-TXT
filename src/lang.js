@@ -36,12 +36,14 @@ var Lang = {
 			doSetMotorSpeed:			'Setze Motor %m.motors auf %n',
 			doSetMotorSpeedDir:			'Setze Motor %m.motors auf %n %m.motorDirections',
 			doSetMotorDir:				'Setze Motor %m.motors auf %m.motorDirections',
+			
 			doSetMotorSpeedDirDist:		'Verfahre Motor %m.motors um %n Schritte mit %n %m.motorDirections',
-			doSetMotorSpeedDirSync:		'Verfahre Motor %m.motors mit %m.motors mit %n %m.motorDirections',
-			doSetMotorSpeedDirDistSync:	'Verfahre Motor %m.motors mit %m.motors um %n Schritte mit %n %m.motorDirections',
+			doSetMotorSpeedDirSync:		'Verfahre Motor %m.motors %m.motorDirections und %m.motors %m.motorDirections mit %n',
+			doSetMotorSpeedDirDistSync:	'Verfahre Motor %m.motors %m.motorDirections und %m.motors %m.motorDirections mit %n für %n Schritte',
 			
 			doStopMotor:				'Stoppe Motor %m.motors',
-			
+			doStopMotorAdv:				'Stoppe Verfahren %m.motors',
+
 			doConfigureInput:			'Setze Eingang %m.inputs auf %m.inputModes',
 			
 			dir_forward:				'vorwärts',
@@ -84,9 +86,10 @@ var Lang = {
 			doSetMotorSpeedDir: 'Set motor %m.motors to %n %m.motorDirections',
 			doSetMotorDir: 'Set motor %m.motors to %m.motorDirections',
 			doSetMotorSpeedDirDist: 'Move motor %m.motors by %n steps with %n %m.motorDirections',
-			doSetMotorSpeedDirSync: 'Move motor %m.motors with %m.motors with %n %m.motorDirections',
-			doSetMotorSpeedDirDistSync: 'Move motor %m.motors with %m.motors by %n steps with %n %m.motorDirections',
+			doSetMotorSpeedDirSync: 'Move motor %m.motors %m.motorDirections and %m.motors %m.motorDirections with %n ',
+			doSetMotorSpeedDirDistSync: 'Move motor %m.motors %m.motorDirections and %m.motors %m.motorDirections with %n by %n steps',
 			doStopMotor: 'Stop motor %m.motors',
+			doStopMotorAdv: 'Stop move %m.motors',
 			doConfigureInput: 'Set input %m.inputs to %m.inputModes',
 			dir_forward: 'forward',
 			dir_backwards: 'back',
