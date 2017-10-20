@@ -110,6 +110,7 @@ var Lang = {
 			reset: 'reset'
 		},
 		
+		/*
 		fr: {
 			onOpenClose: 'Si %m.openCloseSensors %m.inputs %m.openClose',
 			onCounter: 'Si compteur %m.counters %m.compares %n',
@@ -305,6 +306,7 @@ var Lang = {
 			mode_ultrasonic: 'אולטרהסוניק',
 			reset: 'איפוס'
 } 
+	*/
 				
 	},	
 	
