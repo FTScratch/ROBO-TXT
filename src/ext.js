@@ -37,7 +37,7 @@ var Lang = {
 			doSetMotorSpeedDir:			'Setze Motor %m.motors auf %n %m.motorDirections',
 			doSetMotorDir:				'Setze Motor %m.motors auf %m.motorDirections',
 			
-			doSetMotorSpeedDirDist:		'Verfahre Motor %m.motors um %n Schritte mit %n %m.motorDirections',
+			doSetMotorSpeedDirDist:		'Verfahre Motor %m.motors für %n Schritte mit %n %m.motorDirections',
 			doSetMotorSpeedDirSync:		'Verfahre Motor %m.motors %m.motorDirections und %m.motors %m.motorDirections mit %n',
 			doSetMotorSpeedDirDistSync:	'Verfahre Motor %m.motors %m.motorDirections und %m.motors %m.motorDirections mit %n für %n Schritte',
 			

@@ -42,9 +42,9 @@
 					</li>
 					<li>
 						Download the USB driver (
-						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5616">32 Bit</a>
+						<a href="https://www.fischertechnik.de/-/media/fischertechnik/fite/service/downloads/robotics/usbdriverwin32.ashx">32 Bit</a>
 						/
-						<a href="http://www.fischertechnik.de/ResourceImage.aspx?raid=5617">64 Bit</a>
+						<a href="https://www.fischertechnik.de/-/media/fischertechnik/fite/service/downloads/robotics/usbdriverwin64.ashx">64 Bit</a>
 						) and install it
 					</li>
 					<li>
@@ -187,7 +187,8 @@
 			<div class="blockDesc">
 				<div class="image"><img src="doStopMotor.png"/></div>
 				<div class="text">
-					A motor on output M1 - M4 can be stopped using this block. 
+					A motor on output M1 - M4 can be stopped using this block.
+					The corresponding counter is unaffected.
 				</div>
 			</div>
 			
@@ -195,20 +196,27 @@
 				<div class="image"><img src="doSetMotorSpeedDirDist.png"/></div>
 				<div class="text">
 					Output M1 - M4 can be set, e.g. for a motor, for a set number of steps and a speed of 1...8, to forward / backward using this block. Output M1 - M4 can only be started again after running the "Stop motor" block. 
+					Before execution, the corresponding counter is reset.
+					Program execution is blocked until the chosen distance is reached.
+					Outputs M1 - M4 can only be individually started again after running the "Stop move" or "reset" block.  
 				</div>
 			</div>
 			
 			<div class="blockDesc">
 				<div class="image"><img src="doSetMotorSpeedDirSync.png"/></div>
 				<div class="text">
-					Two of the outputs M1 - M4 can be set, e.g. for a motor, synchronised with a speed of 1...8, to forward / backward using this block. Outputs M1 - M4 can only be individually started again after running the "Stop motor" block.  
+					Two of the outputs M1 - M4 can be set, e.g. for a motor, synchronised with a speed of 1...8, to forward / backward using this block.
+					Outputs M1 - M4 can only be individually started again after running the "Stop move" or "reset" block.  
 				</div>
 			</div>
 			
 			<div class="blockDesc">
 				<div class="image"><img src="doSetMotorSpeedDirDistSync.png"/></div>
 				<div class="text">
-					This block is a combination of the two previous blocks. 
+					This block is a combination of the two previous blocks.
+					Before execution, the corresponding counter is reset.
+					Program execution is blocked until the chosen distance is reached.
+					Outputs M1 - M4 can only be individually started again after running the "Stop move" or "reset" block.  
 				</div>
 			</div>
 			
@@ -216,6 +224,7 @@
 				<div class="image"><img src="doStopMotorAdv.png"/></div>
 				<div class="text">
 					A motor on output M1 - M4 can be stopped using this block. 
+					The corresponding counter is reset and synchronisation is disabled.
 				</div>
 			</div>
 			
@@ -229,7 +238,9 @@
 			<div class="blockDesc">
 				<div class="image"><img src="reset.png"/></div>
 				<div class="text">
-					This block resets the ROBO TXT. All outputs are set to 0. 
+					This block resets the ROBO TXT.
+					All outputs and counters are set to 0.
+					Synchronisations are disabled.
 				</div>
 			</div>
 		
